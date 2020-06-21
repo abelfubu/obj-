@@ -1,7 +1,7 @@
 export const apiData = {
   gapi: window.gapi,
   clientId:
-    '83283091153-dqfgi248vt8vld9dqo70q8him3441t59.apps.googleusercontent.com',
+    '83283091153-6o3j3oudfj6eu2q3rk98u3hbuve8lhbh.apps.googleusercontent.com',
   apiKey: 'AIzaSyDySvdANH2lMJGiqrAMHotH89xKlbrTx9s',
   scope: 'https://www.googleapis.com/auth/calendar',
   discoveryDocs: [
