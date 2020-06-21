@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from './components/Navbar';
-import { ThemeProvider, Container, Fab } from '@material-ui/core';
+import { ThemeProvider, Fab } from '@material-ui/core';
 import { mainContext } from './main-context';
 import { lightTheme, darkTheme } from './theme';
 import Cajon from './components/Cajon';
@@ -10,20 +10,27 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 function App(props) {
   const main = useContext(mainContext);
-  return (
-    <ThemeProvider theme={main.dark ? darkTheme : lightTheme}>
-      <div style={main.dark ? { background: 'black', color: 'white' } : null}>
-        <Navbar />
-        <Cajon />
-        <Content />
+  const [input, setInput] = useState('');
 
+  const handleSearch = (search) => {
+    setInput(search);
+  };
+
+  return (
+    <div>
+      <ThemeProvider theme={main.dark ? darkTheme : lightTheme}>
+        <Navbar enter={handleSearch} />
+
+        <Cajon />
+
+        <Content searchinput={input} />
         <ScrollTop {...props}>
           <Fab color='secondary' size='small' aria-label='scroll back to top'>
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   );
 }
 

@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { useScrollTrigger, FormControlLabel, Switch } from '@material-ui/core';
+import { useScrollTrigger, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { mainContext } from '../main-context';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness5Icon from '@material-ui/icons/Brightness5';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar(props) {
   const classes = useStyles();
   const main = useContext(mainContext);
+  const [search, setSearch] = useState('');
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 100,
@@ -80,6 +83,18 @@ export default function SearchAppBar(props) {
   const handleDark = () => {
     main.update({ ...main, dark: !main.dark });
   };
+
+  const handleSearchInput = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      props.enter(search);
+      main.update({ ...main, search: search });
+    }
+  };
+
   return (
     <div id='top' className={classes.root}>
       <AppBar
@@ -97,14 +112,12 @@ export default function SearchAppBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant='h6' noWrap>
-            numDates
+            obj++
           </Typography>
-          <FormControlLabel
-            value='left'
-            control={<Switch onChange={handleDark} color='secondary' />}
-            label='Dark Mode'
-            labelPlacement='end'
-          />
+          <IconButton color='secondary' onClick={handleDark}>
+            {main.dark ? <Brightness4Icon /> : <Brightness5Icon />}
+          </IconButton>
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -116,6 +129,9 @@ export default function SearchAppBar(props) {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              value={search}
+              onKeyDown={handleEnter}
+              onChange={handleSearchInput}
             />
           </div>
         </Toolbar>
