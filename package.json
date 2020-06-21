@@ -1,7 +1,7 @@
 {
   "name": "imp-dates",
-  "homepage": "https://abelfubu.github.io/obj-",
   "version": "0.1.0",
+  "homepage": "https://abelfubu.github.io/obj-/",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",

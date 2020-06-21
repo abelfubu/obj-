@@ -7,6 +7,7 @@ import Cajon from './components/Cajon';
 import Content from './components/Content';
 import ScrollTop from './components/ScrollTop';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+console.log(process.env.REACT_APP_CALENDAR_API_KEY);
 
 function App(props) {
   const main = useContext(mainContext);
