@@ -5,6 +5,9 @@ import { apiData } from '../apiGoogleconfig';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import { mainContext } from '../main-context';
+import { orange } from '@material-ui/core/colors';
+import Fondo from '../images/Fondo.png';
+import FondoDark from '../images/FondoDark.png';
 import {
   makeStyles,
   Box,
@@ -20,19 +23,25 @@ const useStyles = makeStyles({
     marginTop: '0',
     width: '100%',
     maxHeight: 850,
-    height: 850,
+    height: 600,
     minHeight: 400,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    backgroundImage: 'url(' + process.env.PUBLIC_URL + 'Fondo.png)',
+    backgroundImage: 'url(' + Fondo + ')',
   },
   topImgDark: {
     marginTop: '0',
     width: '100%',
     minWidth: '100%',
-    height: '850px',
+    maxHeight: 850,
+    height: 600,
+    minHeight: 400,
     backgroundSize: 'cover',
-    backgroundImage: 'url(' + process.env.PUBLIC_URL + 'FondoDark.png )',
+    backgroundPosition: 'center',
+    backgroundImage: 'url(' + FondoDark + ')',
+  },
+  orange: {
+    backgroundColor: orange[300],
   },
 
   Content: { maxWidth: '100%', width: '100%' },
@@ -79,14 +88,24 @@ const Hero = (props) => {
 
                 <Box my={2} />
                 {main.auth ? (
-                  <Button
-                    fullWidth
-                    variant='contained'
-                    color='secondary'
-                    startIcon={<EventBusyIcon />}
-                    onClick={(e) => handleLogout(e)}>
-                    Log Out
-                  </Button>
+                  <>
+                    <Button
+                      color='secondary'
+                      fullWidth
+                      variant='contained'
+                      className={classes.orange}
+                      startIcon={<EventBusyIcon />}
+                      onClick={(e) => handleLogout(e)}>
+                      Log Out
+                    </Button>
+                    <Box my={2} />
+                    <AddEvent get={props.get} cal={props.cal} />
+                    <Box my={2} />
+                    <SelectCalendar
+                      changeCalendar={props.handleChange}
+                      cals={props.cals}
+                    />
+                  </>
                 ) : (
                   <Button
                     fullWidth
@@ -97,15 +116,6 @@ const Hero = (props) => {
                     Log In
                   </Button>
                 )}
-                <Box my={2} />
-                <AddEvent get={props.get} cal={props.cal} />
-                <Box my={2} />
-                {props.cals.length > 0 ? (
-                  <SelectCalendar
-                    changeCalendar={props.handleChange}
-                    cals={props.cals}
-                  />
-                ) : null}
               </Grid>
             </Box>
           </Grid>

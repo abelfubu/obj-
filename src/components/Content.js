@@ -120,6 +120,13 @@ const Content = (props) => {
     setCalendar(chosenCalendar);
   };
 
+  const logOut = () => {
+    setstate([]);
+    setUserName('');
+    setCalendars('');
+    setCalendar(null);
+  };
+
   return (
     <div className={main.dark ? 'dark' : 'light'}>
       <Grid
@@ -129,7 +136,7 @@ const Content = (props) => {
         className={classes.Content}>
         <Hero
           get={getEvents}
-          set={() => setstate([])}
+          set={logOut}
           cal={calendar}
           cals={calendars}
           handleChange={handleChangeCalendar}

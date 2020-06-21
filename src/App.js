@@ -18,7 +18,7 @@ function App(props) {
   };
 
   return (
-    <div>
+    <div className={main.dark ? 'dark' : 'light'}>
       <ThemeProvider theme={main.dark ? darkTheme : lightTheme}>
         <Navbar enter={handleSearch} />
 
