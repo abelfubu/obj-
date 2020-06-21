@@ -29,7 +29,7 @@ export default function DialogSelect(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [userCalendars, setUserCalendars] = useState([]);
-  const [chosenCalendar, setChosenCalendar] = useState(null);
+  const [chosenCalendar, setChosenCalendar] = useState('');
 
   useEffect(() => {
     setUserCalendars(props.cals);
@@ -40,7 +40,7 @@ export default function DialogSelect(props) {
   };
 
   const handleNew = (id) => {
-    props.changeCalendar(id ? id : 'primary');
+    props.changeCalendar(id);
     setOpen(false);
   };
 

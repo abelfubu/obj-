@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { apiData } from '../apiGoogleconfig';
 import { Button, LinearProgress } from '@material-ui/core/';
 import { mainContext } from '../main-context';
-import 'date-fns';
 import {
   MenuItem,
   Box,
@@ -33,14 +32,8 @@ function AddCalendar(props) {
   const { gapi } = apiData;
   const classes = useStyles();
   const main = useContext(mainContext);
-
   const [open, setOpen] = useState(false);
-
-  const [newCalendar, setNewCalendar] = useState({
-    summary: '',
-    description: 'Calendario creado desde obj++',
-    timeZone: 'Europe/Madrid',
-  });
+  const [newItem, setNewItem] = useState(' ');
 
   const handleAddOpen = () => {
     setOpen(true);
@@ -50,15 +43,27 @@ function AddCalendar(props) {
     setOpen(false);
   };
 
-  const handleNewCalendarTitle = (event) => {
-    setNewCalendar({ ...newCalendar, summary: event.target.value });
+  const handleNewCalendar = (e) => {
+    console.log(e.target.value);
+    setNewItem();
+  };
+
+  const handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      crearCalendario();
+      setOpen(false);
+    }
   };
 
   const crearCalendario = () => {
     main.update({ ...main, loading: true });
     return gapi.client.calendar.calendars
       .insert({
-        resource: newCalendar,
+        resource: {
+          summary: newItem,
+          description: 'Calendario creado desde obj++',
+          timeZone: 'Europe/Madrid',
+        },
       })
       .then(
         function (response) {
@@ -89,11 +94,12 @@ function AddCalendar(props) {
           <div className={classes.actionsContainer}>
             <Box m={3}>
               <TextField
+                autoFocus
                 fullWidth
-                id='NewCalendar'
-                label='Titulo del calendario'
-                onChange={handleNewCalendarTitle}
-                value={newCalendar.summary}
+                label='Titulo'
+                value={newItem}
+                onChange={handleNewCalendar}
+                onKeyPress={handleEnter}
               />
             </Box>
             <div>
@@ -117,4 +123,4 @@ function AddCalendar(props) {
   );
 }
 
-export default React.memo(AddCalendar);
+export default AddCalendar;

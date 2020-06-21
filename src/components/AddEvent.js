@@ -186,7 +186,7 @@ export default function VerticalLinearStepper(props) {
                         disableToolbar
                         onKeyPress={handleEnter}
                         variant='inline'
-                        format='MM/dd/yyyy'
+                        format='dd/MM/yyyy'
                         margin='dense'
                         id='date-picker-inline'
                         label='Fecha de final'

@@ -50,31 +50,10 @@ const Content = (props) => {
         discoveryDocs: discoveryDocs,
         scope: scope,
       })
-      .then(
-        function () {
-          // Listen for sign-in state changes.
-          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-          setUserName(gapi.auth2.getAuthInstance().currentUser.le.Rt.AW);
-          // Handle the initial sign-in state.
-          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-          return gapi.client.calendar.calendarList
-            .list({
-              minAccessRole: 'owner',
-            })
-            .then(
-              function (response) {
-                setCalendars(response.result.items);
-                console.log('Response', response.result.items);
-                main.update((prevValue) => ({ ...prevValue, auth: true }));
-              },
-              function (err) {
-                console.error('Execute error', err);
-                main.update((prevValue) => ({ ...prevValue, auth: false }));
-              },
-            );
-        },
-        function (error) {},
-      );
+      .then(function () {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+      });
   };
 
   const updateSigninStatus = (isSignedIn) => {
@@ -103,6 +82,19 @@ const Content = (props) => {
         setstate(events);
         console.log(response);
         main.update((prevValue) => ({ ...prevValue, loading: false }));
+        if (userName === '') {
+          setUserName(gapi.auth2.getAuthInstance().currentUser.le.Rt.AW);
+        }
+      });
+    return gapi.client.calendar.calendarList
+      .list({
+        minAccessRole: 'owner',
+      })
+      .then(function (response) {
+        setUserName(gapi.auth2.getAuthInstance().currentUser.le.Rt.AW);
+        setCalendars(response.result.items);
+        console.log('Response', response.result.items);
+        main.update((prevValue) => ({ ...prevValue, auth: true }));
       });
   };
 
@@ -124,7 +116,7 @@ const Content = (props) => {
     setstate([]);
     setUserName('');
     setCalendars('');
-    setCalendar(null);
+    setCalendar('primary');
   };
 
   return (
@@ -144,7 +136,7 @@ const Content = (props) => {
         />
         <Container>
           {main.loading && <LinearProgress />}
-          <Box mx={6}>
+          <Box m={6}>
             {userName.length > 0 && (
               <Box my={2}>
                 <Typography variant='h3' color='initial'>
@@ -176,6 +168,7 @@ const Content = (props) => {
               )}
             </Grid>
           </Box>
+          <Box my={10} />
         </Container>
       </Grid>
     </div>
