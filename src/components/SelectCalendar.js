@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 350,
   },
+  grey: {
+    color: 'grey',
+  },
 }));
 
 export default function DialogSelect(props) {
@@ -62,6 +65,7 @@ export default function DialogSelect(props) {
   return (
     <div>
       <Button
+        className={classes.grey}
         fullWidth
         variant='contained'
         startIcon={<EventAvailableIcon />}

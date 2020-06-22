@@ -21,6 +21,7 @@ import {
 const useStyles = makeStyles({
   topImg: {
     marginTop: '0',
+
     width: '100%',
     maxHeight: 850,
     height: 600,
@@ -42,6 +43,7 @@ const useStyles = makeStyles({
   },
   orange: {
     backgroundColor: orange[300],
+    color: 'grey',
   },
 
   Content: { maxWidth: '100%', width: '100%' },
@@ -109,6 +111,7 @@ const Hero = (props) => {
                 ) : (
                   <Button
                     fullWidth
+                    className={classes.white}
                     variant='contained'
                     color='primary'
                     startIcon={<EventAvailableIcon />}

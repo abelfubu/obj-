@@ -64,7 +64,11 @@ export default function RecipeReviewCard(props) {
           subheader={new Date(date).toLocaleDateString('es-ES', options)}
         />
         <CardActions disableSpacing>
-          <IconButton aria-label='share' href={link}>
+          <IconButton
+            aria-label='Calendar'
+            target='_blank'
+            rel='noreferrer'
+            href={link}>
             <CalendarTodayIcon />
           </IconButton>
           <DeleteDialog click={click} />

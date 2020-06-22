@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
   resetContainer: {
     padding: theme.spacing(3),
   },
+  white: {
+    color: 'grey',
+  },
 }));
 const fullDate = new Date().toISOString();
 export default function VerticalLinearStepper(props) {
@@ -131,6 +134,7 @@ export default function VerticalLinearStepper(props) {
   return (
     <div className={classes.root}>
       <Button
+        className={classes.white}
         fullWidth
         variant='contained'
         startIcon={<EventAvailableIcon />}
