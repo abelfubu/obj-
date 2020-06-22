@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9a1bdcd7283cfebe722103bc4111b0eb",
+    "revision": "848f233c256b00a518cc9d213edaa798",
     "url": "/obj-/index.html"
   },
   {
-    "revision": "da143f3d1a8c71d4f61f",
+    "revision": "e9ed5fc6bd99eeed39a9",
     "url": "/obj-/static/css/main.f1c35b5d.chunk.css"
   },
   {
-    "revision": "2c8cab0089689134d076",
-    "url": "/obj-/static/js/2.6969f56b.chunk.js"
+    "revision": "d60ea73ec7ee708a45aa",
+    "url": "/obj-/static/js/2.50d5315a.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/obj-/static/js/2.6969f56b.chunk.js.LICENSE.txt"
+    "url": "/obj-/static/js/2.50d5315a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "da143f3d1a8c71d4f61f",
-    "url": "/obj-/static/js/main.8985f33c.chunk.js"
+    "revision": "e9ed5fc6bd99eeed39a9",
+    "url": "/obj-/static/js/main.e265801f.chunk.js"
   },
   {
     "revision": "6ac46633439ad8290687",
@@ -28,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/obj-/static/media/Fondo.9d27be5d.png"
   },
   {
-    "revision": "0e47723824b4ea2f52d3aa49a448ecdd",
-    "url": "/obj-/static/media/FondoDark.0e477238.png"
+    "revision": "4a4a29c936df8e3982a98a81fbcad07d",
+    "url": "/obj-/static/media/FondoDark.4a4a29c9.png"
   }
 ]);
