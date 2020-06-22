@@ -11,8 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { orange } from '@material-ui/core/colors';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import DeleteIcon from '@material-ui/icons/Delete';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DeleteDialog from './DeleteDialog';
 
 const options = {
   weekday: 'long',
@@ -51,12 +51,12 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
-    <Grid item xs={12} md={6} lg={4} xl={3}>
+    <Grid item xs={12} md={6} lg={4}>
       <Card className={classes.root}>
         <CardHeader
           style={{ textTransform: 'capitalize' }}
           avatar={
-            <Avatar aria-label='recipe' className={classes.avatar}>
+            <Avatar aria-label='Obetivo' className={classes.avatar}>
               {new Date(date).toLocaleDateString('es-ES', options).slice(0, 1)}
             </Avatar>
           }
@@ -67,9 +67,8 @@ export default function RecipeReviewCard(props) {
           <IconButton aria-label='share' href={link}>
             <CalendarTodayIcon />
           </IconButton>
-          <IconButton onClick={click} aria-label='add to favorites'>
-            <DeleteIcon />
-          </IconButton>
+          <DeleteDialog click={click} />
+
           <EditEvent {...props} />
           <IconButton
             className={clsx(classes.expand, {

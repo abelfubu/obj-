@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { mainContext } from '../main-context';
 import Item from './Item';
+import AddEvent from './AddEvent';
 import Hero from './Hero';
 import {
+  CardHeader,
+  Avatar,
   Grid,
   LinearProgress,
   Container,
@@ -27,6 +30,7 @@ console.log(
 
 const useStyles = makeStyles({
   Content: { maxWidth: '100%', margin: 'auto' },
+  inline: { display: 'flex' },
 });
 
 const Content = (props) => {
@@ -79,6 +83,7 @@ const Content = (props) => {
       })
       .then((response) => {
         const events = response.result.items;
+
         setstate(events);
         console.log(response);
         main.update((prevValue) => ({ ...prevValue, loading: false }));
@@ -91,9 +96,10 @@ const Content = (props) => {
         minAccessRole: 'owner',
       })
       .then(function (response) {
-        setUserName(gapi.auth2.getAuthInstance().currentUser.le.Rt.AW);
+        setUserName(gapi.auth2.getAuthInstance().currentUser.le.Rt.Bd);
+        console.log('calendar', gapi.auth2.getAuthInstance());
+        setCalendar(response.result.items[0].summary);
         setCalendars(response.result.items);
-        console.log('Response', response.result.items);
         main.update((prevValue) => ({ ...prevValue, auth: true }));
       });
   };
@@ -138,18 +144,34 @@ const Content = (props) => {
           {main.loading && <LinearProgress />}
           <Box m={6}>
             {userName.length > 0 && (
-              <Box my={2}>
-                <Typography variant='h3' color='initial'>
-                  {userName}, bienvenido
-                </Typography>
-              </Box>
+              <div className={classes.inline}>
+                <Box my={2}>
+                  <CardHeader
+                    style={{ textTransform: 'uppercase' }}
+                    avatar={
+                      <Avatar
+                        variant='square'
+                        src={gapi.auth2.getAuthInstance().currentUser.le.Rt.dL}
+                      />
+                    }
+                    title={userName + '  |  ' + calendar}
+                    subheader={new Date(fullDate).toLocaleDateString(
+                      'es-ES',
+                      options,
+                    )}
+                  />
+                </Box>
+              </div>
             )}
 
             <Grid container spacing={4}>
               {state.length === 0 ? (
-                <Typography variant='h2' color='initial'>
-                  Empieza creando un nuevo objetivo
-                </Typography>
+                <Box mx={3}>
+                  <Typography variant='subtitle2' color='secondary'>
+                    No hay objetivos para mostrar
+                  </Typography>
+                  <AddEvent />
+                </Box>
               ) : (
                 state.map((item) => (
                   <Item

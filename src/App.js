@@ -28,8 +28,8 @@ function App(props) {
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop>
+        <Footer />
       </ThemeProvider>
-      <Footer />
     </div>
   );
 }

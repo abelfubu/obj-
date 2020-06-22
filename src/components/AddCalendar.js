@@ -32,26 +32,25 @@ function AddCalendar(props) {
   const { gapi } = apiData;
   const classes = useStyles();
   const main = useContext(mainContext);
-  const [open, setOpen] = useState(false);
-  const [newItem, setNewItem] = useState(' ');
+  const [addOpen, setAddOpen] = useState(false);
+  const [newItem, setNewItem] = useState('');
 
   const handleAddOpen = () => {
-    setOpen(true);
+    setAddOpen(true);
   };
 
   const handleAddClose = () => {
-    setOpen(false);
+    setAddOpen(false);
   };
 
   const handleNewCalendar = (e) => {
-    console.log(e.target.value);
-    setNewItem();
+    setNewItem(e.target.value);
   };
 
   const handleEnter = (event) => {
     if (event.key === 'Enter') {
       crearCalendario();
-      setOpen(false);
+      setAddOpen(false);
     }
   };
 
@@ -65,38 +64,31 @@ function AddCalendar(props) {
           timeZone: 'Europe/Madrid',
         },
       })
-      .then(
-        function (response) {
-          setOpen(false);
-          console.log(response.result.id);
-          props.add(response.result.id);
-          console.log('newCalendar', response);
-          main.update({ ...main, loading: false });
-        },
-        function (err) {
-          console.error('Execute error', err);
-        },
-      );
+      .then((response) => {
+        setAddOpen(false);
+        props.add(response.result.id);
+        main.update({ ...main, loading: false });
+      });
   };
 
   return (
     <div className={classes.root}>
-      <MenuItem
-        color='primary'
-        onClick={handleAddOpen}
-        value='Crea un calendario nuevo'>
+      <MenuItem color='primary' onClick={handleAddOpen}>
         Crea un calendario nuevo
       </MenuItem>
 
-      <Dialog open={open} onClose={handleAddClose} fullWidth maxWidth='sm'>
+      <Dialog open={addOpen} onClose={handleAddClose} fullWidth maxWidth='sm'>
         <DialogTitle>Nuevo Calendario</DialogTitle>
         <DialogContent>
           <div className={classes.actionsContainer}>
             <Box m={3}>
               <TextField
                 autoFocus
+                margin='dense'
+                id='Title'
+                label='Título'
+                type='text'
                 fullWidth
-                label='Titulo'
                 value={newItem}
                 onChange={handleNewCalendar}
                 onKeyPress={handleEnter}

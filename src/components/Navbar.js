@@ -95,13 +95,18 @@ export default function SearchAppBar(props) {
     }
   };
 
+  const handleSearchClick = () => {
+    props.enter(search);
+    main.update({ ...main, search: search });
+  };
+
   return (
     <div id='top' className={classes.root}>
       <AppBar
-        style={{ transition: 'all 0.5s ease-out' }}
+        style={{ transition: 'all 0.4s ease-in-out' }}
         position='fixed'
         className={!trigger ? 'MuiAppBar-colorTransparent' : classes.root}
-        elevation={!trigger ? 0 : 2}>
+        elevation={!trigger ? 0 : 1}>
         <Toolbar>
           <IconButton
             edge='start'
@@ -132,6 +137,7 @@ export default function SearchAppBar(props) {
               value={search}
               onKeyDown={handleEnter}
               onChange={handleSearchInput}
+              onClick={handleSearchClick}
             />
           </div>
         </Toolbar>

@@ -68,11 +68,7 @@ export default function DialogSelect(props) {
         onClick={handleClickOpen}>
         calendarios
       </Button>
-      <Dialog
-        disableBackdropClick
-        disableEscapeKeyDown
-        open={open}
-        onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Tus Calendarios</DialogTitle>
         <DialogContent>
           <form className={classes.container}>
@@ -92,7 +88,7 @@ export default function DialogSelect(props) {
                       {calendar.summary}
                     </MenuItem>
                   ))}
-                <AddCalendar add={handleNew} />
+                <AddCalendar onClick={handleClose} add={handleNew} />
                 <RemoveCalendar close={handleNew} id={calendarId} />
               </Select>
             </FormControl>
